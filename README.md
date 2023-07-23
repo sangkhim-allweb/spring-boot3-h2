@@ -1,7 +1,7 @@
 # spring-boot3-h2
 
 ## swagger
-    http://localhost:8080/swagger-ui.html
+    http://localhost:8080/api/
 
 ## h2 database console
     http://localhost:8080/h2-console
