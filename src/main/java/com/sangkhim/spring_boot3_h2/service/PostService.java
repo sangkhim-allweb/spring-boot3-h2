@@ -9,7 +9,6 @@ import com.sangkhim.spring_boot3_h2.model.entity.Tag;
 import com.sangkhim.spring_boot3_h2.repository.AuthorRepository;
 import com.sangkhim.spring_boot3_h2.repository.PostRepository;
 import com.sangkhim.spring_boot3_h2.repository.TagRepository;
-import com.sangkhim.spring_boot3_h2.utils.PageUtils;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -17,7 +16,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.Cacheable;
-import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -35,11 +33,6 @@ public class PostService {
 
   @Cacheable(value = "posts")
   public List<Post> getAllPosts(String title) {
-    log.info("Getting posts.");
-
-    Page<Post> postListWithPagination =
-        postRepository.findAllPostsWithPagination(PageUtils.pageable(1, 10, "title", "ASC"));
-
     List<Post> postList;
     if (title == null) {
       postList = postRepository.findAll();
@@ -50,8 +43,6 @@ public class PostService {
   }
 
   public Post getById(Long id) {
-    log.info("Getting post with ID {}.", id);
-
     return postRepository
         .findById(id)
         .orElseThrow(
@@ -61,8 +52,6 @@ public class PostService {
   }
 
   public Post createOrUpdate(PostDTO postRequest) {
-    log.info("Create or update post with id {}", postRequest.getId());
-
     Optional<Post> existingPost = postRepository.findById(postRequest.getId());
 
     if (existingPost.isPresent()) {
@@ -130,8 +119,6 @@ public class PostService {
   }
 
   public void deleteById(Long id) {
-    log.info("Delete post with id {}", id);
-
     Optional<Post> post = postRepository.findById(id);
     if (post.isPresent()) {
       postRepository.deleteById(id);
