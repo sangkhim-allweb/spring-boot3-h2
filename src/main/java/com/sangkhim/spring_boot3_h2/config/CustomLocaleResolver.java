@@ -36,8 +36,8 @@ public class CustomLocaleResolver extends AcceptHeaderLocaleResolver implements 
   @Bean
   public LocaleResolver localeResolver() {
     AcceptHeaderLocaleResolver localeResolver = new AcceptHeaderLocaleResolver();
-    localeResolver.setDefaultLocale(Locale.ENGLISH);
-    Locale.setDefault(Locale.ENGLISH);
+    localeResolver.setDefaultLocale(new Locale("km"));
+    Locale.setDefault(new Locale("km"));
     return localeResolver;
   }
 }
