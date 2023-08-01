@@ -4,6 +4,7 @@ import com.sangkhim.spring_boot3_h2.exception.BadRequestException;
 import com.sangkhim.spring_boot3_h2.exception.DataNotFoundException;
 import com.sangkhim.spring_boot3_h2.model.entity.Tag;
 import com.sangkhim.spring_boot3_h2.repository.TagRepository;
+import com.sangkhim.spring_boot3_h2.utils.Translator;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -49,7 +50,7 @@ public class TagService {
     if (tag.isPresent()) {
       tagRepository.deleteById(id);
     } else {
-      throw new BadRequestException("Delete error, please check ID and try again");
+      throw new BadRequestException(Translator.toLocale("DELETE_ERROR_PLEASE_CHECK_ID"));
     }
   }
 }

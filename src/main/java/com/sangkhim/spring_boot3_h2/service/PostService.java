@@ -9,6 +9,7 @@ import com.sangkhim.spring_boot3_h2.model.entity.Tag;
 import com.sangkhim.spring_boot3_h2.repository.AuthorRepository;
 import com.sangkhim.spring_boot3_h2.repository.PostRepository;
 import com.sangkhim.spring_boot3_h2.repository.TagRepository;
+import com.sangkhim.spring_boot3_h2.utils.Translator;
 import java.text.MessageFormat;
 import java.util.List;
 import java.util.Optional;
@@ -114,7 +115,7 @@ public class PostService {
       post.get().removeTag(tagId);
       postRepository.save(post.get());
     } else {
-      throw new BadRequestException("Delete error, please check ID and try again");
+      throw new BadRequestException(Translator.toLocale("DELETE_ERROR_PLEASE_CHECK_ID"));
     }
   }
 
@@ -123,7 +124,7 @@ public class PostService {
     if (post.isPresent()) {
       postRepository.deleteById(id);
     } else {
-      throw new BadRequestException("Delete error, please check ID and try again");
+      throw new BadRequestException(Translator.toLocale("DELETE_ERROR_PLEASE_CHECK_ID"));
     }
   }
 }
