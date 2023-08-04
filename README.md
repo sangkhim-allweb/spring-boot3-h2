@@ -9,4 +9,5 @@
 ## other
     Google Java Format
     SonaLint
+    CheckStyle-IDEA
     Disable import * (Settings -> Editor -> Code Syle -> Java -> Imports)
