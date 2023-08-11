@@ -13,4 +13,5 @@
     Google Java Format
     SonaLint
     CheckStyle-IDEA
+    GitHub Copilot
     Disable import * (Settings -> Editor -> Code Syle -> Java -> Imports)
