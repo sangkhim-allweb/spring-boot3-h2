@@ -10,6 +10,7 @@
 
 ## other
 
+    EnvFile
     Google Java Format
     SonaLint
     CheckStyle-IDEA
