@@ -17,6 +17,8 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.modelmapper.ModelMapper;
 import org.springframework.cache.annotation.Cacheable;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -33,12 +35,12 @@ public class PostService {
   private final TagRepository tagRepository;
 
   @Cacheable(value = "posts")
-  public List<Post> getAllPosts(String title) {
-    List<Post> postList;
+  public Page<Post> getAllPosts(Pageable pageable, String title) {
+    Page<Post> postList;
     if (title == null) {
-      postList = postRepository.findAll();
+      postList = postRepository.findAll(pageable);
     } else {
-      postList = postRepository.findByTitleContaining(title);
+      postList = postRepository.findByTitleContainingIgnoreCase(title, pageable);
     }
     return postList;
   }

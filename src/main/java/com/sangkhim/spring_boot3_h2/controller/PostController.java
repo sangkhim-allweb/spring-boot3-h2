@@ -3,9 +3,11 @@ package com.sangkhim.spring_boot3_h2.controller;
 import com.sangkhim.spring_boot3_h2.model.dto.PostDTO;
 import com.sangkhim.spring_boot3_h2.model.entity.Post;
 import com.sangkhim.spring_boot3_h2.service.PostService;
+import com.sangkhim.spring_boot3_h2.utils.PageUtils;
 import jakarta.validation.Valid;
-import java.util.List;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -18,8 +20,10 @@ public class PostController {
   private final PostService service;
 
   @GetMapping("/v1/posts")
-  public ResponseEntity<List<Post>> getAllPosts(@RequestParam(required = false) String title) {
-    List<Post> list = service.getAllPosts(title);
+  public ResponseEntity<Page<Post>> getAllPosts(
+      Pageable pageable, @RequestParam(required = false) String title) {
+
+    Page<Post> list = service.getAllPosts(PageUtils.pageable(pageable), title);
     return new ResponseEntity<>(list, HttpStatus.OK);
   }
 
