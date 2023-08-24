@@ -4,6 +4,7 @@ import io.swagger.v3.oas.models.ExternalDocumentation;
 import io.swagger.v3.oas.models.OpenAPI;
 import io.swagger.v3.oas.models.info.Contact;
 import io.swagger.v3.oas.models.info.Info;
+import org.springdoc.core.models.GroupedOpenApi;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -38,5 +39,27 @@ public class SwaggerConfig implements WebMvcConfigurer {
             new ExternalDocumentation()
                 .description("Documentation")
                 .url("https://t.me/boreytechnology"));
+  }
+
+  @Bean
+  public GroupedOpenApi postApi() {
+    return groupedOpenApi("posts", "/v1/posts/**");
+  }
+
+  @Bean
+  public GroupedOpenApi authorApi() {
+    return groupedOpenApi("authors", "/v1/authors/**");
+  }
+
+  @Bean
+  public GroupedOpenApi tagApi() {
+    return groupedOpenApi("tags", "/v1/tags/**");
+  }
+
+  private GroupedOpenApi groupedOpenApi(String group, String... pathToMatch) {
+    return GroupedOpenApi.builder()
+            .group(group)
+            .pathsToMatch(pathToMatch)
+            .build();
   }
 }
