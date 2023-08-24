@@ -1,0 +1,17 @@
+[Unit]
+Description=Spring Boot 3 H2
+After=syslog.target
+
+[Service]
+User=root
+Group=root
+
+WorkingDirectory=/apps/spring-boot3-h2/
+ExecStart=java $ARG_MEMORY_OPTS -jar "-Dspring.config.import=/apps/.env[.properties]" spring-boot3-h2-1.0.0.jar
+Restart=on-abnormal
+SuccessExitStatus=143
+EnvironmentFile=/apps/spring-boot3-h2/.spring-boot3-h2.conf
+
+[Install]
+WantedBy=multi-user.target
+
