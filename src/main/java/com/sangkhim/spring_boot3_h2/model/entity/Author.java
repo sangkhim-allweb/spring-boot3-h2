@@ -1,5 +1,6 @@
 package com.sangkhim.spring_boot3_h2.model.entity;
 
+import com.sangkhim.spring_boot3_h2.model.entity.base.Base;
 import jakarta.persistence.*;
 import java.io.Serializable;
 import java.util.List;
@@ -12,7 +13,7 @@ import lombok.NoArgsConstructor;
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
-public class Author implements Serializable {
+public class Author extends Base implements Serializable {
 
   private static final long serialVersionUID = 7156526077883281623L;
 
